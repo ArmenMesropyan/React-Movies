@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './MoviesList.scss';
 import {Container, Row, Col} from 'reactstrap';
 import {GetService} from '../../service';
-import {Spinner} from '../';
+import {Spinner, LoadMore} from '../';
 
 export default class MoviesList extends Component {
 
@@ -49,7 +49,7 @@ export default class MoviesList extends Component {
     }
 
     getMoviesElements = ({ id, poster_path, title }) => {
-        const img = this.getService.getPosterImage(poster_path);
+        const img = poster_path ? this.getService.getPosterImage(poster_path) : '/no-image.png';
         return (
             <Col tag="li" className="movies-list__item" md="3" key={id}>
                 <div className="movies-list__movie">
@@ -83,14 +83,17 @@ export default class MoviesList extends Component {
 
         const elements = movies.map(this.getMoviesElements);
         return (
-            <section className="movies-page__list movies-list">
-                <Container>
-                    <h2 className="movies-list__title">{title}</h2>
-                    <Row tag="ul" className="movies-list__list">
-                        {elements}
-                    </Row>
-                </Container>
-            </section>
+            <>
+                <section className="movies-page__list movies-list">
+                    <Container>
+                        <h2 className="movies-list__title">{title}</h2>
+                        <Row tag="ul" className="movies-list__list">
+                            {elements}
+                        </Row>
+                    </Container>
+                </section>
+                <LoadMore />
+            </>
         )
     }
 }
