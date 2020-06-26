@@ -1,0 +1,17 @@
+.movies-list {
+    padding: 20px 0;
+    &__list {
+        padding: 0;
+        list-style: none;
+    }
+    &__title {
+        margin: 0;
+    }
+    &__item {
+        margin-bottom: 20px;
+        cursor: pointer;
+        & img {
+            border-radius: 10px;
+        }
+    }
+}

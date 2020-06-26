@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Home, Search} from '../components';
+import {Home, Search, MoviesList} from '../components';
 import {GetService} from '../service';
 
 export default class MoviesPage extends Component {
@@ -24,11 +24,11 @@ export default class MoviesPage extends Component {
 
     render() {
         const {search} = this.state;
-        console.log('search: ', search);
         return (
             <main className="movies">
                 <Home getMovies={this.getMovies}/>
                 <Search onInputChange={this.onInputChange}/>
+                <MoviesList search={search} getMovies={this.getMovies}/>
             </main>
         )
     }
