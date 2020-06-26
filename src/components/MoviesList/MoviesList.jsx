@@ -15,7 +15,7 @@ export default class MoviesList extends Component {
 
     getService = new GetService();
 
-    setMovies = async() => {
+    async setMovies() {
         try {
             const {getMovies} = this.props;
             const {results, page, total_pages} = await getMovies();
@@ -30,9 +30,32 @@ export default class MoviesList extends Component {
         }
     }
 
+    async setMoviesByQuery(search) {
+        try {
+            const {results, page, total_pages} = await this.getService.getMoviesByQuery(search);
+            this.setState({
+                movies: results,
+                currentPage: page,
+                totalPages: total_pages,
+                loading: false,
+            });
+        } catch (error) {
+            this.setState({loading: false, error: true});
+        }
+    }
+
     componentDidMount() {
         this.setState({loading: true});
         this.setMovies();
+    }
+
+    componentDidUpdate(lastProps) {
+        if(lastProps === this.props) return;
+
+        const {search} = this.props;
+
+        if(!search) this.setMovies();
+        else this.setMoviesByQuery(search);
     }
 
     getMoviesElements = ({ id, poster_path, title }) => {
