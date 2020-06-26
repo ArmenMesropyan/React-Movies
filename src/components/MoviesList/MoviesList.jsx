@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './MoviesList.scss';
 import {Container, Row, Col} from 'reactstrap';
 import {GetService} from '../../service';
+import {Spinner} from '../';
 
 export default class MoviesList extends Component {
 
@@ -11,6 +12,7 @@ export default class MoviesList extends Component {
         totalPages: null,
         loading: false,
         error: false,
+        title: '',
     }
 
     getService = new GetService();
@@ -24,6 +26,7 @@ export default class MoviesList extends Component {
                 currentPage: page,
                 totalPages: total_pages,
                 loading: false,
+                title: 'Popular Movies',
             });
         } catch (error) {
             this.setState({loading: false, error: true});
@@ -38,10 +41,22 @@ export default class MoviesList extends Component {
                 currentPage: page,
                 totalPages: total_pages,
                 loading: false,
+                title: 'Search Results',
             });
         } catch (error) {
             this.setState({loading: false, error: true});
         }
+    }
+
+    getMoviesElements = ({ id, poster_path, title }) => {
+        const img = this.getService.getPosterImage(poster_path);
+        return (
+            <Col tag="li" className="movies-list__item" md="3" key={id}>
+                <div className="movies-list__movie">
+                    <img src={img} alt={title}/>
+                </div>
+            </Col>
+        );
     }
 
     componentDidMount() {
@@ -58,25 +73,14 @@ export default class MoviesList extends Component {
         else this.setMoviesByQuery(search);
     }
 
-    getMoviesElements = ({ id, poster_path, title }) => {
-        const img = this.getService.getPosterImage(poster_path);
-        return (
-            <Col tag="li" className="movies-list__item" md="3" key={id}>
-                <div className="movies-list__movie">
-                    <img src={img} alt={title}/>
-                </div>
-            </Col>
-        );
-    }
-
     render() {
-        const {movies, loading, error} = this.state;
-        if(!movies || loading) return null;// Loading
+        const {movies, loading, title, error} = this.state;
+        if(!movies || loading) return <Spinner className="movies-list__spinner"/>;
         const elements = movies.map(this.getMoviesElements);
         return (
             <section className="movies-page__list movies-list">
                 <Container>
-                    <h2 className="movies-list__title">Popular Movies</h2>
+                    <h2 className="movies-list__title">{title}</h2>
                     <Row tag="ul" className="movies-list__list">
                         {elements}
                     </Row>

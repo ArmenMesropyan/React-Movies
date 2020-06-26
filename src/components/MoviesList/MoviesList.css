@@ -1,0 +1,33 @@
+.movies-list {
+  padding: 20px 0;
+}
+
+.movies-list__list {
+  padding: 0;
+  list-style: none;
+}
+
+.movies-list__title {
+  margin-bottom: 30px;
+}
+
+.movies-list__item {
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.movies-list__item img {
+  border-radius: 10px;
+}
+
+.movies .movies-list__spinner {
+  background: #1d1c1c;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+/*# sourceMappingURL=MoviesList.css.map */
