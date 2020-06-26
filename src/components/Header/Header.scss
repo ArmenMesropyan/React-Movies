@@ -1,0 +1,52 @@
+.main-header {
+    background-color: #1d1c1c;
+    padding: 15px 0;
+    &__list,
+    &__links {
+        list-style: none;
+        margin-bottom: 0;
+        padding: 0;
+    }
+    &__list {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    &__item {
+        &_links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            align-items: center;
+        }
+    }
+    &__links {
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    &__link {
+        margin-right: 30px;
+        &_tmdb {
+            width: 80px;
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+        &.active a {
+            color: #fff;
+            &:hover {
+                color: rgb(190, 184, 184);
+            }
+        }
+        & a {
+            color: rgb(121, 118, 118);
+            transition: 0.5s;
+            &:hover {
+                color: #fff;
+                text-decoration: none;
+                transition: 0.5s;
+            }
+        }
+    }
+}
