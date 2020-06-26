@@ -1,0 +1,21 @@
+.first-section {
+    min-height: 600px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    color: #fff;
+    &__text {
+        padding: 20px 0;
+    }
+    &__title {
+        margin-bottom: 30px;
+        font-weight: 700;
+        max-width: 600px;
+    }
+    &__overview {
+        margin: 0;
+        max-width: 600px;
+        font-weight: 500;
+        font-size: 17px;
+    }
+}

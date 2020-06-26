@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Home} from '../components';
 
 export default class MoviesPage extends Component {
     state = {
@@ -8,7 +9,7 @@ export default class MoviesPage extends Component {
     render() {
         return (
             <main className="movies">
-                MoviesPage
+                <Home />
             </main>
         )
     }
