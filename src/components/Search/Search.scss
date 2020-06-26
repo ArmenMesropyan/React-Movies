@@ -1,0 +1,33 @@
+.search-panel {
+    background-color: #1d1c1c;
+    padding: 15px 0;
+    &__input {
+        font-size: 20px;
+        background: none;
+        width: 100%;
+        border-radius: 20px;
+        padding-left: 20px;
+        padding: 10px 0 10px 75px;
+        background-color: #101010;
+        border: 1px solid #101010;
+        color: #fff;
+        transition: 0.5s;
+        &:focus {
+            outline: none;
+            border-color: #fff;
+            transition: 0.5s;
+        }
+    }
+    &__fieldset {
+        border: none;
+        background: none;
+        position: relative;
+    }
+    &__icon {
+        position: absolute;
+        top: 10px;
+        font-size: 27px;
+        left: 30px;
+        color: #fff;
+    }
+}
