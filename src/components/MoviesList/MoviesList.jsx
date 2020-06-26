@@ -17,12 +17,13 @@ export default class MoviesList extends Component {
 
     getService = new GetService();
 
-    async setMovies() {
+    async setMovies(searchPage = 1, action) {
         try {
             const {getMovies} = this.props;
-            const {results, page, total_pages} = await getMovies();
+            const {results, page, total_pages} = await getMovies(searchPage);
+            const movies = action === 'load' ? [...this.state.movies, ...results] : results;
             this.setState({
-                movies: results,
+                movies,
                 currentPage: page,
                 totalPages: total_pages,
                 loading: false,
@@ -33,11 +34,12 @@ export default class MoviesList extends Component {
         }
     }
 
-    async setMoviesByQuery(search) {
+    async setMoviesByQuery(search, searchPage = 1, action) {
         try {
-            const {results, page, total_pages} = await this.getService.getMoviesByQuery(search);
+            const {results, page, total_pages} = await this.getService.getMoviesByQuery(search, searchPage);
+            const movies = action === 'load' ? [...this.state.movies, ...results] : results;
             this.setState({
-                movies: results,
+                movies,
                 currentPage: page,
                 totalPages: total_pages,
                 loading: false,
@@ -57,6 +59,16 @@ export default class MoviesList extends Component {
                 </div>
             </Col>
         );
+    }
+
+    onLoadMoreClick = () => {
+        const {search} = this.props;
+        const {currentPage, totalPages} = this.state;
+
+        if(currentPage > totalPages) return; // not enough pages notify
+
+        if(search) this.setMoviesByQuery(search, currentPage + 1, 'load');
+        else this.setMovies(currentPage + 1, 'load');
     }
 
     componentDidMount() {
@@ -92,7 +104,7 @@ export default class MoviesList extends Component {
                         </Row>
                     </Container>
                 </section>
-                <LoadMore />
+                <LoadMore onLoadMoreClick={this.onLoadMoreClick} />
             </>
         )
     }

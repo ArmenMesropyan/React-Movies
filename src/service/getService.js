@@ -16,7 +16,7 @@ export default class GetService {
         }
     }
 
-    getMovies = async(page = 1) => {
+    getMovies = async(page) => {
         try {
             const { movieAPI, movieKey } = this.config;
             const endpoint = `${movieAPI}movie/popular?api_key=${movieKey}&language=en-US&page=${page}`;
@@ -27,7 +27,7 @@ export default class GetService {
         }
     }
 
-    getMoviesByQuery = async(query, page = 1) => {
+    getMoviesByQuery = async(query, page) => {
         try {
             const { movieAPI, movieKey } = this.config;
             const endpoint = `${movieAPI}search/movie?api_key=${movieKey}&language=en-US&query=${query}&page=${page}`;

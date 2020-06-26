@@ -8,9 +8,9 @@ export default class MoviesPage extends Component {
     }
     getService = new GetService();
 
-    getMovies = async() => {
+    getMovies = async(page) => {
         try {
-            const movies = await this.getService.getMovies();
+            const movies = await this.getService.getMovies(page);
             return movies;
         } catch (error) {
             return Promise.reject(error);
