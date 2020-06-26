@@ -68,6 +68,7 @@ export default class MoviesList extends Component {
         if(lastProps === this.props) return;
 
         const {search} = this.props;
+        this.setState({loading: true});
 
         if(!search) this.setMovies();
         else this.setMoviesByQuery(search);
@@ -75,7 +76,8 @@ export default class MoviesList extends Component {
 
     render() {
         const {movies, loading, title, error} = this.state;
-        if(!movies || loading) return <Spinner className="movies-list__spinner"/>;
+        console.log('loading: ', loading);
+        if(loading || !movies) return <Spinner className="movies-list__spinner"/>;
         const elements = movies.map(this.getMoviesElements);
         return (
             <section className="movies-page__list movies-list">
