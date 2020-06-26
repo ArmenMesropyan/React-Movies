@@ -37,6 +37,7 @@ export default class Home extends Component {
 
     render() {
         const {background, title, overview, loading, error} = this.state;
+        if(error) return <div className="first-section__error">Oops... Something goes wrong!</div>
         if(loading) return <Spinner className="first-section__spinner"/>
         return (
             <section className="movies-page__first first-section" style={{

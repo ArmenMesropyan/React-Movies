@@ -18,6 +18,19 @@
         font-weight: 500;
         font-size: 17px;
     }
+    &__error {
+        width: 100%;
+        min-height: 100vh;
+        position: absolute;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #1d1c1c;
+        z-index: -1;
+        color: #fff;
+        font-size: 40px;
+    }
 }
 
 .movies .first-section__spinner {
