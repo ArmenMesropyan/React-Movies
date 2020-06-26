@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './Home.scss';
 import {Container} from 'reactstrap';
 import {GetService} from '../../service';
+import {Spinner} from '../';
 
 export default class Home extends Component {
     state = {
@@ -16,8 +17,6 @@ export default class Home extends Component {
 
     async setMovies() {
         try {
-            this.setState({loading: true});
-
             const {getMovies} = this.props;
             const {results} = await getMovies();
 
@@ -32,11 +31,13 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
+        this.setState({loading: true});
         this.setMovies();
     }
 
     render() {
-        const {background, title, overview} = this.state;
+        const {background, title, overview, loading, error} = this.state;
+        if(loading) return <Spinner className="first-section__spinner"/>
         return (
             <section className="movies-page__first first-section" style={{
                 background: 
