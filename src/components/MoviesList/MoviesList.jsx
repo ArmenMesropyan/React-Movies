@@ -76,8 +76,11 @@ export default class MoviesList extends Component {
 
     render() {
         const {movies, loading, title, error} = this.state;
-        console.log('loading: ', loading);
+
+        if (error) return <div className="movies-list__error">Oops... There are no results!</div>
+
         if(loading || !movies) return <Spinner className="movies-list__spinner"/>;
+
         const elements = movies.map(this.getMoviesElements);
         return (
             <section className="movies-page__list movies-list">
