@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BreadCrumbs, Spinner} from '../components';
+import {BreadCrumbs, Spinner, MovieHome} from '../components';
 import {GetService} from '../service';
 import './Movie.scss';
 
@@ -9,6 +9,8 @@ export default class MoviePage extends Component {
 
     state = {
         movie: null,
+        cast: null,
+        crew: null,
         title: '',
         loading: false,
         error: false,
@@ -18,7 +20,8 @@ export default class MoviePage extends Component {
         try {
             const {match: {params: {moviesId}}} = this.props;
             const {title, ...movie} = await this.getService.getMovieById(moviesId);
-            this.setState({loading: false, movie, title});
+            const {cast, crew} = await this.getService.getMovieById(moviesId, '/credits');
+            this.setState({loading: false, movie, title, cast, crew});
         } catch (error) {
             this.setState({loading: false, error: true});
         }
@@ -30,13 +33,16 @@ export default class MoviePage extends Component {
     }
 
     render() {
-        const {title, loading, error} = this.state;
+        const {title, loading, movie, crew, error} = this.state;
         const {match: {params: {moviesId}}} = this.props;
 
         return (
             <main className="movie">
                 {loading ? <Spinner className="movie__spinner"/>
-                 : <BreadCrumbs title={title} movieId={moviesId}/>
+                 :  <>
+                        <BreadCrumbs title={title} movieId={moviesId}/>
+                        <MovieHome movie={movie} getService={this.getService} crew={crew}/>
+                    </>
                 }
             </main>
         )

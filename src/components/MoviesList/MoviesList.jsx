@@ -52,7 +52,7 @@ export default class MoviesList extends Component {
     }
 
     getMoviesElements = ({ id, poster_path, title }) => {
-        const img = poster_path ? this.getService.getPosterImage(poster_path) : '/no-image.png';
+        const img = poster_path ? this.getService.getPosterImage(poster_path) : '/img/no-image.png';
         return (
             <Col tag="li" className="movies-list__item" md="3" key={id}>
                 <div className="movies-list__movie">
