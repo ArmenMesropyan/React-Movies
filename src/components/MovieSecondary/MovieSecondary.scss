@@ -1,0 +1,38 @@
+.icon {
+    font-size: 30px;
+    margin-right: 15px;
+}
+
+.secondary {
+    background: #1d1c1c;
+    color: #fff;
+    font-weight: 500;
+    font-size: 17px;
+    padding: 20px 0;
+    &__list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        & li {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+    }
+    &__runtime {
+        &-icon {
+            @extend .icon;
+        }
+    }
+    &__budget {
+        &-icon {
+            @extend .icon;
+        }
+    }
+    &__revenue {
+        &-icon {
+            @extend .icon;
+        }
+    }
+}
