@@ -3,6 +3,7 @@ import './MoviesList.scss';
 import {Container, Row, Col} from 'reactstrap';
 import {GetService} from '../../service';
 import {Spinner, LoadMore} from '../';
+import {Link} from 'react-router-dom';
 
 export default class MoviesList extends Component {
 
@@ -55,7 +56,9 @@ export default class MoviesList extends Component {
         return (
             <Col tag="li" className="movies-list__item" md="3" key={id}>
                 <div className="movies-list__movie">
-                    <img src={img} alt={title}/>
+                    <Link to={{pathname: `/${id}`, movieName: `${title}`}}>
+                        <img src={img} alt={title}/>
+                    </Link>
                 </div>
             </Col>
         );

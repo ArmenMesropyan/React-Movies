@@ -1,5 +1,6 @@
 import React from 'react';
 import {Container, Row, Col} from 'reactstrap'; 
+import {Link} from 'react-router-dom';
 import './Header.scss';
 
 const Header = () => {
@@ -8,9 +9,9 @@ const Header = () => {
             <Container tag="nav" className="main-header__nav">
                 <Row tag="ul" className="main-header__list">
                     <Col tag="li" className="main-header__item main-header__item_logo">
-                        <a href="/">
+                        <Link to="/">
                             <img src="/logo.png" alt="Movies DB"/>
-                        </a>
+                        </Link>
                     </Col>
                     <Col tag="li" className="main-header__item main-header__item_links">
                         <ul className="main-header__links">
