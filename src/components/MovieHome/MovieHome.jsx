@@ -6,12 +6,14 @@ const MovieHome = ({movie, crew, getService}) => {
     if(!movie) return null;
     console.log('movie: ', movie);
 
-    const {backdrop_path, poster_path, original_title, status, overview, vote_average} = movie;
+    const {backdrop_path, poster_path, original_title, status, overview, vote_average, runtime, budget, revenue} = movie;
     const background = getService.getBackgroundImage(backdrop_path);
     const image = getService.getPosterImage(poster_path);
     const rating = vote_average * 10;
     const directors = crew.filter(({job}) => job === 'Director');
-    console.log('directors: ', directors);
+    const [hours, minutes] = (runtime / 60).toFixed(2).split('.');
+    const [transformBudget] = (budget).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,').split('.');
+    const [transformRevenue] = (revenue).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,').split('.');
 
     return (
         <section className="movie__info movie-info" style={{
@@ -39,10 +41,13 @@ const MovieHome = ({movie, crew, getService}) => {
                             ))}
                         </ul>
                         <span className="movie-info__icon">
-                            <img src="/img/cinema.svg"/>
+                            <img src="/img/cinema.svg" alt="Movie icon"/>
                         </span>
                     </Col>
                 </Row>
+                <div className="movie-info__secondary">
+
+                </div>
             </Container>
         </section>
     );
