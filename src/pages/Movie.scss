@@ -1,0 +1,12 @@
+.movie {
+    & .movie__spinner {
+        background: #1d1c1c;
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+    }
+}

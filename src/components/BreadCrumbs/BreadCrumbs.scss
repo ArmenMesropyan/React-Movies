@@ -1,0 +1,28 @@
+.breadcrumbs {
+    background: #403e3e;
+    &__list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px 0;
+    }
+    &__item {
+        margin-right: 10px;
+        & a {
+            color: #fff;
+            font-weight: 500;
+            font-size: 20px;
+            transition: 0.5s;
+            &:hover {
+                text-decoration: none;
+                color: #2ebcd0;
+                transition: 0.5s;
+            }
+        }
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

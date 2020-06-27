@@ -4,3 +4,4 @@ export {default as Spinner} from './Spinner';
 export {default as Search} from './Search';
 export {default as MoviesList} from './MoviesList';
 export {default as LoadMore} from './LoadMore';
+export {default as BreadCrumbs} from './BreadCrumbs';
