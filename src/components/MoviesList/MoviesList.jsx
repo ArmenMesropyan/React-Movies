@@ -56,7 +56,7 @@ export default class MoviesList extends Component {
         return (
             <Col tag="li" className="movies-list__item" md="3" key={id}>
                 <div className="movies-list__movie">
-                    <Link to={{pathname: `/${id}`, movieName: `${title}`}}>
+                    <Link to={{pathname: `/movies/${id}`, movieName: `${title}`}}>
                         <img src={img} alt={title}/>
                     </Link>
                 </div>
