@@ -42,7 +42,7 @@ export default class MoviePage extends Component {
 
         return (
             <main className="movie">
-                {loading ? <Spinner className="movie__spinner"/>
+                {loading ? <Spinner className="spinner"/>
                  :  <>
                         <BreadCrumbs title={title} movieId={moviesId}/>
                         <MovieHome movie={movie} getService={this.getService} crew={crew}/>
