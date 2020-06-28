@@ -21,6 +21,7 @@ export default class MoviePage extends Component {
         try {
             const {match: {params: {moviesId}}} = this.props;
             const {title, ...movie} = await this.getService.getMovieById(moviesId);
+            console.log('movie: ', movie);
             const {cast, crew} = await this.getService.getMovieById(moviesId, '/credits');
             const {results: trailers} = await this.getService.getMovieById(moviesId, '/videos');
             this.setState({loading: false, movie, title, cast, crew, trailers});
@@ -36,6 +37,7 @@ export default class MoviePage extends Component {
 
     render() {
         const {title, loading, movie, crew, trailers, cast, error} = this.state;
+        console.log('error: ', error);
         const {match: {params: {moviesId}}} = this.props;
 
         return (

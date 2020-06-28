@@ -1,7 +1,9 @@
 export default class GetService {
     config = {
         movieAPI: 'https://api.themoviedb.org/3/',
+        pixabayAPI: 'https://pixabay.com/api/',
         movieKey: 'b3b72e264bfde0ee393669648c9ca8a5',
+        pixabayKey: '15212282-8558594e4fc03d75ba0bb8a93',
         imageURL: 'http://image.tmdb.org/t/p/',
         backgroundSize: 'w1280',
         posterSize: 'w500',
@@ -53,6 +55,17 @@ export default class GetService {
         try {
             const { movieAPI, movieKey } = this.config;
             const endpoint = `${movieAPI}person/${id}?api_key=${movieKey}&language=en-US`;
+            const data = await this.fetchData(endpoint)
+            return data;
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
+    getImageByQuery = async(query) => {
+        try {
+            const { pixabayAPI, pixabayKey } = this.config;
+            const endpoint = `${pixabayAPI}?key=${pixabayKey}&q=${encodeURIComponent(query)}&image_type=photo&min_width=1280&`;
             const data = await this.fetchData(endpoint)
             return data;
         } catch (error) {
