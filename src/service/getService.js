@@ -49,6 +49,17 @@ export default class GetService {
         }
     }
 
+    getActorById = async(id) => {
+        try {
+            const { movieAPI, movieKey } = this.config;
+            const endpoint = `${movieAPI}person/${id}?api_key=${movieKey}&language=en-US`;
+            const data = await this.fetchData(endpoint)
+            return data;
+        } catch (error) {
+            return Promise.reject(error);
+        }
+    }
+
     getBackgroundImage(url) {
         const { imageURL, backgroundSize } = this.config;
         return `${imageURL}${backgroundSize}${url}`

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BreadCrumbs, Spinner, MovieHome, TrailersList} from '../components';
+import {BreadCrumbs, Spinner, MovieHome, TrailersList, ActorsList} from '../components';
 import {GetService} from '../service';
 import './Movie.scss';
 
@@ -31,11 +31,13 @@ export default class MoviePage extends Component {
     
     componentDidMount() {
         this.setState({loading: true});
+        console.log(this.getService.getActorById(32798));
         this.setMovie();
     }
 
     render() {
         const {title, loading, movie, crew, trailers, cast, error} = this.state;
+        console.log('cast: ', cast);
         const {match: {params: {moviesId}}} = this.props;
 
         return (
@@ -45,6 +47,7 @@ export default class MoviePage extends Component {
                         <BreadCrumbs title={title} movieId={moviesId}/>
                         <MovieHome movie={movie} getService={this.getService} crew={crew}/>
                         <TrailersList trailers={trailers}/>
+                        <ActorsList />
                     </>
                 }
             </main>
