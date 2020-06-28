@@ -9,3 +9,4 @@ export {default as MovieHome} from './MovieHome';
 export {default as MovieSecondary} from './MovieSecondary';
 export {default as TrailersList} from './TrailersList';
 export {default as ActorsList} from './ActorsList';
+export {default as FirstSection} from './FirstSection';
