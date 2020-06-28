@@ -5,7 +5,6 @@ import {MovieSecondary} from '../';
 
 const MovieHome = ({movie, crew, getService}) => {
     if(!movie) return null;
-    console.log('movie: ', movie);
 
     const {backdrop_path, poster_path, original_title, status, overview, vote_average, runtime, budget, revenue} = movie;
     const background = getService.getBackgroundImage(backdrop_path);

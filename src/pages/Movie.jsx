@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {BreadCrumbs, Spinner, MovieHome} from '../components';
+import {BreadCrumbs, Spinner, MovieHome, TrailersList} from '../components';
 import {GetService} from '../service';
 import './Movie.scss';
 
@@ -14,6 +14,7 @@ export default class MoviePage extends Component {
         title: '',
         loading: false,
         error: false,
+        trailers: null,
     }
 
     async setMovie() {
@@ -21,7 +22,8 @@ export default class MoviePage extends Component {
             const {match: {params: {moviesId}}} = this.props;
             const {title, ...movie} = await this.getService.getMovieById(moviesId);
             const {cast, crew} = await this.getService.getMovieById(moviesId, '/credits');
-            this.setState({loading: false, movie, title, cast, crew});
+            const {results: trailers} = await this.getService.getMovieById(moviesId, '/videos');
+            this.setState({loading: false, movie, title, cast, crew, trailers});
         } catch (error) {
             this.setState({loading: false, error: true});
         }
@@ -33,7 +35,7 @@ export default class MoviePage extends Component {
     }
 
     render() {
-        const {title, loading, movie, crew, error} = this.state;
+        const {title, loading, movie, crew, trailers, cast, error} = this.state;
         const {match: {params: {moviesId}}} = this.props;
 
         return (
@@ -42,6 +44,7 @@ export default class MoviePage extends Component {
                  :  <>
                         <BreadCrumbs title={title} movieId={moviesId}/>
                         <MovieHome movie={movie} getService={this.getService} crew={crew}/>
+                        <TrailersList trailers={trailers}/>
                     </>
                 }
             </main>
