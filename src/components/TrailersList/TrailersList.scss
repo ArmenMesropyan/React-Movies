@@ -1,4 +1,19 @@
 .trailers {
     background: #403e3e;
     color: #fff;
+    padding: 20px 0;
+    &__title {
+        font-size: 30;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    &__list {
+        list-style: none;
+    }
+    &__item {
+        outline: none;
+    }
+    &__video {
+        margin: 0 auto;
+    }
 }
