@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Spinner} from '../components';
+import {Spinner, FirstSection} from '../components';
 import {GetService} from '../service';
 import './Movie.scss';
 
@@ -8,30 +8,38 @@ export default class MoviePage extends Component {
     getService = new GetService();
 
     state = {
-        movie: null,
-        cast: null,
-        crew: null,
-        title: '',
-        loading: false,
-        error: false,
-        trailers: null,
+        background: null,
+        image: null,
+        name: '',
+        biography: '',
+        birthday: '',
+        birthPlace: '',
+        popularity: 0,
     }
 
     async setActor() {
         try {
             const {match: {params: {actorId}}} = this.props;
-            const {
-                biography,
+            const { biography, name, place_of_birth, profile_path, popularity, birthday } = await this.getService.getActorById(actorId);
+
+            const images = await this.getService.getImageByQuery(place_of_birth);
+            const image = this.getService.getPosterImage(profile_path);
+            const background = images.hits[0].largeImageURL;
+            const [, month, day, year] = new Date(birthday).toString().split(' ');
+            const formatBirthday = `${day} ${month} ${year}`;
+
+            this.setState({
+                loading: false,
+                background,
                 name,
-                place_of_birth,
-                profile_path,
+                image,
+                biography,
+                birthday: formatBirthday,
+                birthPlace: place_of_birth,
                 popularity,
-                birthday } = await this.getService.getActorById(actorId);
-                
-            const {hints: [background]} = await this.getService.getImageByQuery(place_of_birth);
-            console.log('background: ', background);
-            
+            });
         } catch (error) {
+            console.log(error);
             this.setState({loading: false, error: true});
         }
     }
@@ -42,20 +50,17 @@ export default class MoviePage extends Component {
     }
 
     render() {
-        const {loading, error} = this.state;
-
+        const {background, loading, error} = this.state;
+        console.log('background: ', background);
+        // background, image, title, status = '', text, rating, children
         return (
-            <div>Actor page</div>
-            // <main className="actor">
-            //     {loading ? <Spinner className="actor__spinner"/>
-            //      :  <>
-            //             <BreadCrumbs title={title} movieId={moviesId}/>
-            //             <MovieHome movie={movie} getService={this.getService} crew={crew}/>
-            //             <TrailersList trailers={trailers}/>
-            //             <ActorsList actors={cast} getService={this.getService}/>
-            //         </>
-            //     }
-            // </main>
+            <main className="actor">
+                {loading ? <Spinner className="actor__spinner"/>
+                 :  <>
+                        <FirstSection />
+                    </>
+                }
+            </main>
         )
     }
 }
