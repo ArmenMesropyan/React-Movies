@@ -8,7 +8,7 @@ const ActorsList = ({actors, getService}) => {
     console.log('actors: ', actors);
 
     const elements = actors.map(({name, profile_path, character, id}) => {
-        const personImage = getService.getPosterImage(profile_path);
+        const personImage = profile_path ? getService.getPosterImage(profile_path) : '/img/no-image.png';
         return (
             <Col tag="li" className="actors-list__item" md="3" key={id}>
                 

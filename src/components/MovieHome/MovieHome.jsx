@@ -8,7 +8,7 @@ const MovieHome = ({movie, crew, getService}) => {
     const {backdrop_path, poster_path, original_title, status, overview, vote_average, runtime, budget, revenue} = movie;
     const background = getService.getBackgroundImage(backdrop_path);
     const image = getService.getPosterImage(poster_path);
-    const rating = vote_average * 10;
+    const rating = vote_average.toFixed(1) * 10;
     const directors = crew.filter(({job}) => job === 'Director');
     const time = (runtime / 60).toFixed(2).split('.');
     const [transformBudget] = (budget).toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,').split('.');

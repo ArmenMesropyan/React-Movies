@@ -47,7 +47,7 @@ export default class MoviePage extends Component {
                         <BreadCrumbs title={title} movieId={moviesId}/>
                         <MovieHome movie={movie} getService={this.getService} crew={crew}/>
                         <TrailersList trailers={trailers}/>
-                        <ActorsList actors={cast} getService={this.getService}/>
+                        <ActorsList actors={cast} getService={this.getService} movie={movie}/>
                     </>
                 }
             </main>

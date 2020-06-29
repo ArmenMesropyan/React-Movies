@@ -25,8 +25,11 @@ export default class MoviePage extends Component {
             const {match: {params: {actorId}}} = this.props;
             const { biography, name, place_of_birth, profile_path, popularity, birthday } = await this.getService.getActorById(actorId);
 
-            const images = await this.getService.getImageByQuery(place_of_birth);
-            const image = this.getService.getPosterImage(profile_path);
+            let images;
+            if (place_of_birth) images = await this.getService.getImageByQuery(place_of_birth);
+            else images = {hits: [null]};
+            
+            const image = profile_path ? this.getService.getPosterImage(profile_path) : '/img/no-image.png';
             const background = images.hits[0] ? images.hits[0].largeImageURL : null;
             const [, month, day, year] = new Date(birthday).toString().split(' ');
             const formatBirthday = `${day} ${month} ${year}`;
@@ -34,12 +37,12 @@ export default class MoviePage extends Component {
             this.setState({
                 loading: false,
                 background,
-                name,
+                name: name || 'There is no actor in your request.',
                 image,
                 biography,
                 birthday: formatBirthday,
                 birthPlace: place_of_birth,
-                popularity,
+                popularity: popularity.toFixed(1) * 10 > 100 ? 100 : popularity.toFixed(1) * 10,
             });
         } catch (error) {
             console.log(error);
@@ -54,7 +57,9 @@ export default class MoviePage extends Component {
 
     render() {
         const {background, image, name, biography, popularity, birthPlace, birthday, loading, error} = this.state;
-        const params = {background, image, title: name, text: biography, rating: Math.round(popularity * 10)};
+        const params = {background, image, title: name, text: biography, rating: popularity};
+        console.log(this.props);
+        console.log('birthPlace: ', birthPlace);
 
         return (
             <main className="actor">
@@ -62,8 +67,8 @@ export default class MoviePage extends Component {
                  :  <>
                         <FirstSection {...params}>
                             <ul className="actor-info">
-                                <p className="actor-info__birthday">Birthday: {birthday}</p>
-                                <p className="actor-info__birthday">Birth Place: {birthPlace}</p>
+                                <p className="actor-info__birthday">Birthday: {birthday || 'Not found'}</p>
+                                <p className="actor-info__birthday">Birth Place: {birthPlace || 'Not found'}</p>
                             </ul>
                         </FirstSection>
                     </>
