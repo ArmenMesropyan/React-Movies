@@ -6,6 +6,7 @@ const MovieHome = ({movie, crew, getService}) => {
     if(!movie) return null;
 
     const {backdrop_path, poster_path, original_title, status, overview, vote_average, runtime, budget, revenue} = movie;
+
     const background = getService.getBackgroundImage(backdrop_path);
     const image = getService.getPosterImage(poster_path);
     const rating = vote_average.toFixed(1) * 10;

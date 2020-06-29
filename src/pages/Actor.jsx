@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Spinner, FirstSection} from '../components';
+import {Spinner, FirstSection, ErrorMsg} from '../components';
 import {GetService} from '../service';
 import './Movie.scss';
 import './Actor.scss';
@@ -23,7 +23,13 @@ export default class MoviePage extends Component {
     async setActor() {
         try {
             const {match: {params: {actorId}}} = this.props;
-            const { biography, name, place_of_birth, profile_path, popularity, birthday } = await this.getService.getActorById(actorId);
+            const { biography, name, place_of_birth, profile_path, popularity, birthday, ...actor } = await this.getService.getActorById(actorId);
+            console.log('actor: ', actor);
+
+            if(actor.status_message) {
+                this.setState({loading: false, error: 'Sorry, there are no results.'});
+                return;
+            }
 
             let images;
             if (place_of_birth) images = await this.getService.getImageByQuery(place_of_birth);
@@ -46,7 +52,7 @@ export default class MoviePage extends Component {
             });
         } catch (error) {
             console.log(error);
-            this.setState({loading: false, error: true});
+            this.setState({loading: false, error: 'Ooops... something goes wrong!'});
         }
     }
 
@@ -58,8 +64,8 @@ export default class MoviePage extends Component {
     render() {
         const {background, image, name, biography, popularity, birthPlace, birthday, loading, error} = this.state;
         const params = {background, image, title: name, text: biography, rating: popularity};
-        console.log(this.props);
-        console.log('birthPlace: ', birthPlace);
+
+        if(error) return <ErrorMsg msg={error}/>
 
         return (
             <main className="actor">

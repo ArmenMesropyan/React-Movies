@@ -14,7 +14,7 @@ const BreadCrumbs = ({title, movieId}) => {
                         </Link>
                     </li>
                     <li className="breadcrumbs__item">
-                        <Link to={`/${movieId}`}>
+                        <Link to={`/movies/${movieId}`}>
                             / {title}
                         </Link>
                     </li>

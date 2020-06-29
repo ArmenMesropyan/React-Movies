@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './Home.scss';
 import {Container} from 'reactstrap';
 import {GetService} from '../../service';
-import {Spinner} from '../';
+import {Spinner, ErrorMsg} from '../';
 
 export default class Home extends Component {
     state = {
@@ -37,8 +37,12 @@ export default class Home extends Component {
 
     render() {
         const {background, title, overview, loading, error} = this.state;
-        if(error) return <div className="first-section__error">Oops... Something goes wrong!</div>
+        console.log('error: ', error);
+
+        if(error) return <ErrorMsg msg='Oops... Something goes wrong!'/>
+
         if(loading) return <Spinner className="first-section__spinner"/>
+
         return (
             <section className="movies-page__first first-section" style={{
                 background: 

@@ -6,12 +6,12 @@ const FirstSection = ({background, image, title, status = '', text, rating, chil
     return (
         <section className="first-section" style={{
             background: 
-                `linear-gradient(rgba(0, 0, 0, 0) , rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%), url(${background}) center top / cover, rgb(28, 28, 28)`
+            `linear-gradient(rgba(0, 0, 0, 0) , rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%), url(${background}) center top / cover, rgb(28, 28, 28)`
         }}>
             <Container>
                 <Row tag="ul" className="first-section__list">
                     <Col tag="li" md="4" className="first-section__img">
-                        <img src={image} alt='First section background image'/>
+                        <img src={image} alt='First section background img'/>
                     </Col>
                     <Col tag="li" md="8" className="first-section__info">
                         <h1 className="first-section__title">{title}</h1>
